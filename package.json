@@ -24,6 +24,7 @@
   "main": "index.js",
   "typings": "./index.d.ts",
   "dependencies": {
+    "redux-tx": "^0.2.3",
     "path-parser": "^2.0.2",
     "tslib": "^1.7.1"
   },
