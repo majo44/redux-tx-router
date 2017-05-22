@@ -1,6 +1,6 @@
 {
   "name": "redux-tx-router",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "description": "Universal, transactional router for Redux",
   "keywords": [
@@ -20,7 +20,7 @@
     "url": "https://github.com/majo44/redux-tx-router.git"
   },
   "npmName": "redux-tx-router",
-  "browser": "redux-tx-router.js",
+  "browser": "redux-tx-router.min.js",
   "main": "index.js",
   "typings": "./index.d.ts",
   "dependencies": {
