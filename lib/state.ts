@@ -1,6 +1,5 @@
 
 export type RouteParams = {
-    [key: string]: string
 } | void;
 
 export interface RouteState {

@@ -1,6 +1,6 @@
 {
   "name": "redux-tx-router",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "license": "MIT",
   "description": "Universal, transactional router for Redux",
   "keywords": [
@@ -24,7 +24,7 @@
   "main": "index.js",
   "typings": "./index.d.ts",
   "dependencies": {
-    "redux-tx": "^0.2.3",
+    "redux-tx": "^0.2.6",
     "path-parser": "^2.0.2",
     "tslib": "^1.7.1"
   },
