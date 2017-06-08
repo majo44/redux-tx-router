@@ -139,7 +139,7 @@ describe('router', () => {
         });
 
         it('should support redirection', async () => {
-            await navigate(redirectRoute.href(), dispatchSpy, null);
+            let res = await navigate(redirectRoute.href(), dispatchSpy, null);
 
             expect(dispatchSpy.callCount).eq(9);
             expect(dispatchSpy.args[4][0]).eql({ type: 'RedirectionAction',
@@ -157,6 +157,7 @@ describe('router', () => {
                 payload: {
                     url: otherwiseRoute.href()
                 }});
+            expect(res).eql(true);
         });
 
         it('should support error handling', async () => {
@@ -178,7 +179,9 @@ describe('router', () => {
             let nav1 = navigate(canceledRoute.href(), dispatchSpy, null);
             let nav2 = navigate(regularRoute.href(), dispatchSpy, null);
             sem1.continue();
-            await Promise.all([nav1, nav1]);
+
+            let res = await Promise.all([nav1, nav2]);
+            expect(res).eql([false, true]);
         });
 
         it('should support navigation cancellation', async () => {
@@ -186,9 +189,8 @@ describe('router', () => {
             let nav2 = navigate(regularRoute.href(), dispatchSpy, null);
             sem1.continue();
 
-            await Promise.all([nav1, nav1]);
-
-            console.log(dispatchSpy.args);
+            let res = await Promise.all([nav1, nav2]);
+            expect(res).eql([false, true]);
         });
 
     });
