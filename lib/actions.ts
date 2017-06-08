@@ -2,11 +2,11 @@ import {Action, Dispatch} from 'redux';
 import {ThunkAction} from 'redux-thunk';
 import {InternalRouter} from './router';
 import {RouteState} from './state';
-export type RequireRouterThunkAction<S> = ThunkAction<Promise<void>, S, any> & {$$requireRouter?: boolean};
+export type RequireRouterThunkAction<S> = ThunkAction<Promise<boolean>, S, any> & {$$requireRouter?: boolean};
 
-export function navigateAction<S>(url: string): ThunkAction<Promise<void>, S, any> {
+export function navigateAction<S>(url: string): ThunkAction<Promise<boolean>, S, any> {
     let navigateAction: RequireRouterThunkAction<S> =
-        async function(dispatch: Dispatch<S>, getState: () => S, router: InternalRouter<S>): Promise<void> {
+        async function(dispatch: Dispatch<S>, getState: () => S, router: InternalRouter<S>): Promise<boolean> {
             if (!router) {
                 throw 'No router provided to navigation action. You probably forgot to add router middleware to storage.';
             }

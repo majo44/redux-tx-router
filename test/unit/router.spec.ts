@@ -80,12 +80,12 @@ describe('router', () => {
         let regularRoute = createRoute('a', '/a');
         let otherwiseRoute = createRoute('b', '/b');
         let redirectRoute = createRoute('c', '/c',
-            (args: any, dispatch: Dispatch<any>, getState: () => any) => {
-                return dispatch(navigateAction('/b'));
+            async (args: any, dispatch: Dispatch<any>, getState: () => any) => {
+                await dispatch(navigateAction('/b'));
             });
         let redirectErrorRoute = createRoute('f', '/f',
-            (args: any, dispatch: Dispatch<any>, getState: () => any) => {
-                return dispatch(navigateAction('/d'));
+            async (args: any, dispatch: Dispatch<any>, getState: () => any) => {
+                await dispatch(navigateAction('/d'));
             });
         let errorRoute = createRoute('d', '/d',
             async (args: any, dispatch: Dispatch<any>, getState: () => any) => {

@@ -10,7 +10,7 @@ import {
 } from './actions';
 
 export interface InternalRouter<S> {
-    navigate(url: string, dispatch: Dispatch<S>, getState: () => S): Promise<void>;
+    navigate(url: string, dispatch: Dispatch<S>, getState: () => S): Promise<boolean>;
 }
 
 export interface Router<S> {
@@ -32,12 +32,13 @@ export function createRouter<S>(
     };
 }
 
-export function createNavigation<S>(routesList: Array<Route<any, S>>, otherwise: string) {
+export function createNavigation<S>(routesList: Array<Route<any, S>>, otherwise: string):
+    (url: string, dispatch: Dispatch<S>, getState: () => S) => Promise<boolean> {
 
     let tx: TransactionPromise;
     let dispatchInNavigateTransaction: boolean;
 
-    return async function navigate(url: string, dispatch: Dispatch<S>, getState: () => S): Promise<void> {
+    return async function navigate(url: string, dispatch: Dispatch<S>, getState: () => S): Promise<boolean> {
 
         let nestedNavigation = dispatchInNavigateTransaction;
 
@@ -84,6 +85,7 @@ export function createNavigation<S>(routesList: Array<Route<any, S>>, otherwise:
         });
         tx = myTx;
         await myTx;
+        return myTx.state === 'COMMITED';
     };
 }
 
